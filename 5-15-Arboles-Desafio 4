@@ -1,0 +1,51 @@
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None
+        self.derecho = None
+
+class ArbolBinarioBusqueda:
+    def __init__(self):
+        self.raiz = None
+
+    def insertar(self, valor):
+        # Si el árbol está vacío, el nuevo nodo se convierte en la raíz
+        if self.raiz is None:
+            self.raiz = Nodo(valor)
+        else:
+            # Insertar de manera iterativa
+            actual = self.raiz
+            while True:
+                if valor < actual.valor:
+                    if actual.izquierdo is None:
+                        actual.izquierdo = Nodo(valor)
+                        break
+                    actual = actual.izquierdo
+                elif valor > actual.valor:
+                    if actual.derecho is None:
+                        actual.derecho = Nodo(valor)
+                        break
+                    actual = actual.derecho
+
+    def buscar(self, valor):
+        # Buscar de manera iterativa
+        actual = self.raiz
+        while actual is not None:
+            if valor == actual.valor:
+                return True
+            elif valor < actual.valor:
+                actual = actual.izquierdo
+            else:
+                actual = actual.derecho
+        return False
+
+# Ejemplo de uso
+abb = ArbolBinarioBusqueda()
+valores = [10, 5, 15, 3, 7, 12, 18]
+for valor in valores:
+    abb.insertar(valor)
+
+# Búsqueda de un valor en el ABB
+numero_a_buscar = 7
+existe = abb.buscar(numero_a_buscar)
+print(f"¿Existe el número {numero_a_buscar} en el árbol?:", existe)
